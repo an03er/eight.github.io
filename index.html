@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Calculator</title>
+        <title>Form</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style.css" rel="stylesheet" type="text/css">
@@ -11,27 +11,88 @@
     </head> 
 
     <body>
-        <section class="main" id="main">
-            <div class="container">
-                <button class="prev" id="prev">prev</button>
-                <div class="carousel">
-                        <div class="slide" name="slide"><img src="im_a.jpg"></div>
-                        <div class="slide" name="slide"><img src="im_2.jpg"></div>
-                        <div class="slide" name="slide"><img src="im_3.jpg"></div>
-                        <div class="slide" name="slide"><img src="im_4.jpg"></div>
-                        <div class="slide" name="slide"><img src="im_5.jpg"></div>
-                        <div class="slide" name="slide"><img src="im_6.jpg"></div>
-                        <div class="slide" name="slide"><img src="im_7.jpg"></div>
-                        <div class="slide" name="slide"><img src="im_8.jpg"></div>
-                    </ul>
+        <div class="wrapper-two hide">
+            <button class="close" id="close">Закрыть</button>
+            <form 
+            class="formcarryForm" 
+            action="https://formcarry.com/s/uDOzIEy4Rv"
+            enctype="multipart/form-data"
+            >
+            <div class="form">
+                    <input class="inp" type="text" id="name" name="name" placeholder="Введите имя" required/>
+                    <input class="inp" type="email" name="email" placeholder="example@gmail.com" required/>
+                    <input class="inp" type="tel" name="tel" placeholder="+0-000-00-00" required/>
+                    <div class="check">
+                        <input class="agreement" type="checkbox" name="agreement" required> Я согласен(на) с политикой обработки персональных данных
+                    </div>
+                    <input class="mess" type="text" name="massage" placeholder="Обратная связь" required> 
+                    <button class="but" type="submit">Отправить</button>
+                    <input class="res" type="reset" value="Обновить">
                 </div>
-                <button class="next" id="next"><img src="i.png"></button>
+            </form>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script>
+        $(function(){
+        $(".formcarryForm").submit(function(e){
+            e.preventDefault();
+            var href = $(this).attr("action");
+            
+            $.ajax({
+                type: "POST",
+                url: href,
+                data: new FormData(this),
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function(response){
+                if(response.status == "success"){
+                    alert("Форма успешно отправлена, спасибо!");
+                }
+                else if(response.code === 422){
+                    alert("Field validation failed");
+                    $.each(response.errors, function(key) {
+                    $('[name="' + key + '"]').addClass('formcarry-field-error');
+                    });
+                }
+                else{
+                    alert("An error occured: " + response.message);
+                }
+                },
+                error: function(jqXHR, textStatus){
+                const errorObject = jqXHR.responseJSON
+
+                alert("Request failed, " + errorObject.title + ": " + errorObject.message);
+                },
+                complete: function(){
+                // Use this block to run some code after request is complete.
+                }
+            });
+        });
+        });
+        </script>
+        <div class="wrapper-one">
+            <button class="open">Заполнить форму</button>
+        </div>
+        <div class="container">
+            <div class="post">
+                <div class="post-image">
+                    <img src="image.jpg">
+                </div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <h1>La creazione di Adamo</h1>
+                        <div class="post-meta">
+                            <time datetime="2019-04-01">1511</time>
+                            <span class="author">Michelangelus Buonarroti</span>
+                            <span class="category">Sacellum Sixtinum, Vaticanum</span>
+                        </div>
+                    </div>
+                    <p>"Creatio Adam" est una ex praestantissimis Compositionibus Picturae Sacelli Sixtini. Deus pater in spatio infinito volat, angelis alatis circumdatus, tunica alba volans. Dextra versus adam manum extenditur et paene tangit. In viridi petra iacens, corpus Adae paulatim movere incipit, ad vitam excitat. Tota compositio in gestu duarum manuum contrahitur. Manus Dei impulsum dat, et manus Adam eam accipit, totum corpus vitalis energiae dans. Ex eo quod manus eorum non tangunt, Michelangelus impossibilitatem divinam et humanam connectendi inculcavit. Ad Imaginem Dei, secundum consilium artificis, non initium miraculosum praevalet, sed vis creatrix ingens. Ad Imaginem Adam, Michael Angelus virtutem et pulchritudinem corporis humani celebrat. Re quidem vera, non est ipsius hominis creatio, quae coram nobis apparet, sed momentum quo accipit animam, flagrantem inquisitionem divinam, sitim cognitionis.
+                    </p>
+                </div>
             </div>
-            <div class="dots">
-                <span class="dot" value = "1"></span>
-                <span class="dot" value = "2"></span>
-                <span class="dot" value = "3"></span>
-            </div>
-        </section>
+        </div>
     </body>
 </html>
