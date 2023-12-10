@@ -15,18 +15,18 @@
             <button class="close" id="close">Закрыть</button>
             <form 
             class="formcarryForm" 
-            action="https://formcarry.com/s/uDOzIEy4Rv"
+            action="https://formcarry.com/s/To4BvWdHO-"
             enctype="multipart/form-data"
             >
             <div class="form">
-                    <input class="inp" type="text" id="name" name="name" placeholder="Введите имя" required/>
+                    <input class="inp" type="text" name="name" placeholder="Введите имя" required/>
                     <input class="inp" type="email" name="email" placeholder="example@gmail.com" required/>
                     <input class="inp" type="tel" name="tel" placeholder="+0-000-00-00" required/>
                     <div class="check">
                         <input class="agreement" type="checkbox" name="agreement" required> Я согласен(на) с политикой обработки персональных данных
                     </div>
-                    <input class="mess" type="text" name="massage" placeholder="Обратная связь" required> 
-                    <button class="but" type="submit">Отправить</button>
+                    <input class="inp" type="text" name="massage" placeholder="Обратная связь" required> 
+                    <button class="but" type="submit" id="feedback-button">Отправить</button>
                     <input class="res" type="reset" value="Обновить">
                 </div>
             </form>
@@ -48,7 +48,7 @@
                 contentType: false,
                 success: function(response){
                 if(response.status == "success"){
-                    alert("Форма успешно отправлена, спасибо!");
+                    alert("We received your submission, thank you!");
                 }
                 else if(response.code === 422){
                     alert("Field validation failed");
@@ -66,6 +66,7 @@
                 alert("Request failed, " + errorObject.title + ": " + errorObject.message);
                 },
                 complete: function(){
+                // This will be fired after request is complete whether it's successful or not.
                 // Use this block to run some code after request is complete.
                 }
             });
