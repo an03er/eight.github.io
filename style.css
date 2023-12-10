@@ -13,22 +13,20 @@ body{
 .wrapper-two{
     background-color: #9FA4A9;
     height: 600px;
-    width: 850px;
+    max-width: 850px;
+    width: 100%;
     border-radius: 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     position: absolute;
     z-index: 9;
 }
 
-.formcarryForm{
+.form{
+    padding-top: 100px;
     display: flex;
     justify-content: center;
-    transition: 10s ease max-height;
-}
-.form{
-    padding: 30px;
-    display: flex;
     flex-direction: column;
     color: #C2D3CD;
 }
@@ -184,5 +182,8 @@ p {
     .post-header {
         padding-left: 26px;
         margin-left: -30px;
+    }
+    .wrapper-two{
+        margin-left: 200px;
     }
 }
